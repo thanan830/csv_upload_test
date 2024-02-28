@@ -18,6 +18,9 @@ jobs:
       with:
         python-version: 3.8
 
+    - name: Set permissions for Python script
+      run: chmod +x path/to/process_csv.py
+
     - name: Install dependencies
       run: |
         pip install -r requirements.txt
@@ -27,4 +30,4 @@ jobs:
       run: echo "CSV_FILE_PATH=$(find . -name '*.csv' | head -n 1)" >> $GITHUB_ENV
 
     - name: Run Python script
-      run: wf_action_script/process_csv.py
+      run: python wf_action_script/process_csv.py
