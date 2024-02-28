@@ -1,6 +1,8 @@
 import os
 import csv
 import requests
+import sys
+import datetime
 
 def post_to_erpnext(item_data):
     # Your existing post_to_erpnext function code here...
