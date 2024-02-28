@@ -19,7 +19,7 @@ jobs:
         python-version: 3.8
 
     - name: Set permissions for Python script
-      run: chmod +x path/to/process_csv.py
+      run: chmod +x wf_action_script/process_csv.py
 
     - name: Install dependencies
       run: |
