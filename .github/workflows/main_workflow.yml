@@ -1,0 +1,30 @@
+name: Main Workflow
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  process_csv:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.8
+
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt
+      # Adjust this if you have specific dependencies
+
+    - name: Set CSV file path environment variable
+      run: echo "CSV_FILE_PATH=$(find . -name '*.csv' | head -n 1)" >> $GITHUB_ENV
+
+    - name: Run Python script
+      run: wf_action_script/process_csv.py
