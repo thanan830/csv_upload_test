@@ -16,7 +16,7 @@ def post_to_erpnext(item_data):
         'doctype': 'Item',
         'Item Code': item_data['Item Code'],
         'Item Name': item_data['Item Name'],
-        'Description': item_data['Description'],
+        'Default Unit of Measure' : item_data['Default Unit of Measure'],
         # Add other fields as needed
     }
 
