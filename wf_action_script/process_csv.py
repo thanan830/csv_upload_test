@@ -35,7 +35,7 @@ def post_to_erpnext(items):
         if http_err.response.status_code == 401:
             log_error("Unauthorized access. Check API key and permissions.")
         else:
-            log_error(f"HTTP error during post requests: {str(http_err)}{str(headers)} {str({'di':data})} {str(response)}")
+            log_error(f"HTTP error during post requests: {str(http_err)}{str(headers)} {str(response)}")
     except requests.exceptions.RequestException as e:
         log_error(f"Error during post requests: {str(e)}")
 
