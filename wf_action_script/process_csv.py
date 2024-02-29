@@ -36,13 +36,13 @@ def post_to_erpnext(items):
         else:
             log_error(f"HTTP error during post request: {str(http_err)}")
     except requests.exceptions.RequestException as e:
-        log_error(f"Error during post request: {str(e)}")
+        log_error(f"Error during post requests: {str(e),str(data)}")
 
 def handle_server_error(response):
-    # Handle specific errors for 500 server errors
     if response.status_code == 500:
         error_message = "Internal Server Error. Check ERPNext server logs for details."
         log_error(error_message)
+        log_error(f"Server Response: {response.text}")  # Log the full response content
     else:
         log_error(f"Failed to post items: {response.text}")
 
