@@ -12,7 +12,8 @@ def post_to_erpnext(items):
 
     # Replace 'YOUR_ERP_NEXT_API_KEY' with your API key or other authentication method
     headers = {'Authorization': 'token 36378cc91a2561b:63cef04404341a9',
-               'Content-Type': 'application/json'}
+               'Content-Type': 'application/json',
+               'Accept': 'application/json',}
 
     # Prepare data for the POST request
     data = {'data': items}
