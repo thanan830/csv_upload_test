@@ -11,7 +11,7 @@ def post_to_erpnext(items):
     api_endpoint = 'https://rangsutra-test-v14.frappe.cloud/api/resource/Item'
 
     # Replace 'YOUR_ERP_NEXT_API_KEY' with your API key or other authentication method
-    headers = {'Authorization': 'Bearer 36378cc91a2561b:63cef04404341a9'}
+    headers = {'Authorization': 'token 36378cc91a2561b:63cef04404341a9'}
 
     # Prepare data for the POST request
     data = {'data': items}
