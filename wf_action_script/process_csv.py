@@ -16,8 +16,8 @@ def post_to_erpnext(items):
                'Accept': 'application/json',}
 
     # Prepare data for the POST request
-    # data = {'data': items}
-    data = {items}
+    data = {'data': items}
+    # data = {items}
 
     try:
         # Make the POST request
