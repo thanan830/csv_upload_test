@@ -28,6 +28,11 @@ def post_to_erpnext(items):
         else:
             log_error(f"Failed to post items: {response.text}")
 
+    except requests.exceptions.HTTPError as http_err:
+        if http_err.response.status_code == 401:
+            log_error("Unauthorized access. Check API key and permissions.")
+        else:
+            log_error(f"HTTP error during post request: {str(http_err)}")
     except requests.exceptions.RequestException as e:
         log_error(f"Error during post request: {str(e)}")
 
