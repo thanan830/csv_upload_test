@@ -16,7 +16,8 @@ def post_to_erpnext(items):
                'Accept': 'application/json',}
 
     # Prepare data for the POST request
-    data = {'data': items}
+    # data = {'data': items}
+    data = {items}
 
     try:
         # Make the POST request
@@ -34,7 +35,7 @@ def post_to_erpnext(items):
         if http_err.response.status_code == 401:
             log_error("Unauthorized access. Check API key and permissions.")
         else:
-            log_error(f"HTTP error during post requests: {str(http_err)} {str(data)}")
+            log_error(f"HTTP error during post requests: {str(http_err)}{str(headers)} {str(data)} {str(response)}")
     except requests.exceptions.RequestException as e:
         log_error(f"Error during post requests: {str(e)}")
 
@@ -72,13 +73,16 @@ def process_csv(csv_file_path):
             }
             items.append(item_data)
 
-            if len(items) >= BATCH_SIZE:
-                post_to_erpnext(items)
-                items = []
+            if item_data:
+                post_to_erpnext(item_data)
+
+            # if len(items) >= BATCH_SIZE:
+            #     post_to_erpnext(items)
+            #     items = []
 
     # Post any remaining items
-    if items:
-        post_to_erpnext(items)
+    # if items:
+    #     post_to_erpnext(items)
 
 if __name__ == "__main__":
     csv_file_path = os.getenv('CSV_FILE_PATH')
