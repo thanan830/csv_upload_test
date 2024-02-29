@@ -26,7 +26,7 @@ def post_to_erpnext(items):
         if response.status_code == 200:
             print(f"Items posted successfully.")
         else:
-            log_error(f"Failed to post items: {response.text}")
+            handle_server_error(response)
 
     except requests.exceptions.HTTPError as http_err:
         if http_err.response.status_code == 401:
@@ -35,6 +35,14 @@ def post_to_erpnext(items):
             log_error(f"HTTP error during post request: {str(http_err)}")
     except requests.exceptions.RequestException as e:
         log_error(f"Error during post request: {str(e)}")
+
+def handle_server_error(response):
+    # Handle specific errors for 500 server errors
+    if response.status_code == 500:
+        error_message = "Internal Server Error. Check ERPNext server logs for details."
+        log_error(error_message)
+    else:
+        log_error(f"Failed to post items: {response.text}")
 
 def log_error(error_message):
     # Log the error to a file
@@ -51,10 +59,13 @@ def process_csv(csv_file_path):
         csv_reader = csv.DictReader(csv_file)
         for row in csv_reader:
             item_data = {
-                'doctype': 'Item',
-                'Item Code': row['Item Code'],
-                'Item Name': row['Item Name'],
-                'Default Unit of Measure': row['Default Unit of Measure'],
+                #'doctype': 'Item',
+                'item_code': row['Item Code'],
+                'item_name': row['Item Name'],
+                'stock_uom': row['Default Unit of Measure'],
+                'gst_hsn_code':row['HSN/SAC'],
+                'description':row['Description'],
+                'item_group':row['Item Group'],
                 # Add other fields as needed
             }
             items.append(item_data)
