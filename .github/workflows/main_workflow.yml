@@ -28,7 +28,7 @@ jobs:
         pip install frappe-client  # Install the Frappe client library or any library you need
 
     - name: Read CSV and Post to ERPNext
-      run: python .github/scripts/process_csv.py
+      run: python wf_action_script/process_csv.py
 
 
 
