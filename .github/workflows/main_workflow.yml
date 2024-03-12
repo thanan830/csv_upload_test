@@ -1,4 +1,4 @@
-name: Main Workflow
+name: CSV Update Workflow
 
 on:
   push:
@@ -16,24 +16,61 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
-        python-version: 3.8
+        python-version: 3.x
 
     - name: Set permissions for Python script
       run: chmod +x wf_action_script/process_csv.py
 
     - name: Install dependencies
       run: |
+        python -m pip install --upgrade pip
         pip install -r requirements.txt
-      # Adjust this if you have specific dependencies
+        pip install -e frappe-client  # Install the Frappe client library or any library you need
 
-    - name: Set CSV file path environment variable
-      run: |
-        CSV_PATH=$(find . -name '*.csv' | head -n 1)
-        if [ -z "$CSV_PATH" ]; then
-            echo "No CSV file found. Exiting."
-            exit 0
-        fi
-        echo "CSV_FILE_PATH=$CSV_PATH" >> $GITHUB_ENV
+    - name: Read CSV and Post to ERPNext
+      run: python .github/scripts/process_csv.py
 
-    - name: Run Python script
-      run: python wf_action_script/process_csv.py
+
+
+
+
+# name: Main Workflow
+
+# on:
+#   push:
+#     branches:
+#       - main
+
+# jobs:
+#   process_csv:
+#     runs-on: ubuntu-latest
+
+#     steps:
+#     - name: Checkout code
+#       uses: actions/checkout@v2
+
+#     - name: Set up Python
+#       uses: actions/setup-python@v2
+#       with:
+#         python-version: 3.8
+
+#     - name: Set permissions for Python script
+#       run: chmod +x wf_action_script/process_csv.py
+
+#     - name: Install dependencies
+#       run: |
+#         pip install -r requirements.txt
+#       # Adjust this if you have specific dependencies
+
+#     - name: Set CSV file path environment variable
+#       run: |
+#         CSV_PATH=$(find . -name '*.csv' | head -n 1)
+#         if [ -z "$CSV_PATH" ]; then
+#             echo "No CSV file found. Exiting."
+#             exit 0
+#         fi
+#         echo "CSV_FILE_PATH=$CSV_PATH" >> $GITHUB_ENV
+
+#     - name: Run Python script
+#       run: python wf_action_script/process_csv.py
+
