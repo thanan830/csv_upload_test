@@ -3,9 +3,9 @@ import csv
 from frappeclient import FrappeClient
 
 # ERPNext credentials and URL
-erpnext_url = "https://rangsutra-test-v14.frappe.cloud/"
-erpnext_username = "ramchander.b@promantia.com"
-erpnext_password = "ram@1234"
+erpnext_url = "https://finance-staging.qoala.app/"
+erpnext_username = "Administrator"
+erpnext_password = "Qoala@321"
 
 # Connect to ERPNext
 client = FrappeClient(erpnext_url, erpnext_username, erpnext_password)
