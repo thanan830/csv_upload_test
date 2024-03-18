@@ -197,6 +197,8 @@ for root, dirs, files in os.walk(repo_path):
         if file.endswith(".csv"):
             csv_path = os.path.join(root, file)
 
+            print('Reading the file '+str(csv_path))
+            
             # Read the entire CSV file into memory
             with open(csv_path, 'r') as csv_file:
                 csv_reader = csv.DictReader(csv_file)
